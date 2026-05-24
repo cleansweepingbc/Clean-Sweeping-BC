@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clean Sweeping Parrott | Premium Cleaning Services — Lower Mainland BC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory: #F5F0E8;
+      --cream: #EDE7D9;
+      --charcoal: #1C1C1A;
+      --deep: #111110;
+      --gold: #B8975A;
+      --gold-light: #D4B07A;
+      --sage: #7A8C76;
+      --sage-light: #A3B49F;
+      --warm-grey: #8A8680;
+      --border: rgba(184,151,90,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--charcoal); color: var(--ivory); overflow-x: hidden; }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1000; opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(28,28,26,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); text-decoration: none; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
+    .nav-links a:hover { opacity: 1; color: var(--gold-light); }
+    .nav-cta { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 0.65rem 1.5rem; text-decoration: none; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+    .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 10rem 4rem 6rem 4rem; position: relative; z-index: 2; }
+    .hero-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.9s ease 0.2s forwards; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--ivory); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+    .hero-title em { font-style: italic; color: var(--gold-light); }
+    .hero-subtitle { font-size: 0.85rem; font-weight: 300; line-height: 1.9; color: var(--warm-grey); max-width: 380px; margin-bottom: 3rem; letter-spacing: 0.04em; opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards; }
+    .hero-actions { display: flex; gap: 1.5rem; align-items: center; opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards; }
+    .btn-primary { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 1rem 2.5rem; text-decoration: none; transition: background 0.3s, transform 0.3s; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-secondary { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.3s, border-color 0.3s; }
+    .btn-secondary:hover { color: var(--gold-light); border-color: var(--gold); }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-right::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, #2A3028 0%, #1A1F18 40%, #0F1410 100%); z-index: 1; }
+    .hero-pattern { position: absolute; inset: 0; z-index: 2; opacity: 0.12; background-image: repeating-linear-gradient(45deg, var(--gold) 0, var(--gold) 1px, transparent 0, transparent 50%); background-size: 30px 30px; }
+    .hero-emblem { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; text-align: center; opacity: 0; animation: fadeIn 1.2s ease 1s forwards; }
+    .hero-emblem-ring { width: 280px; height: 280px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; margin: auto; }
+    .hero-emblem-ring::before { content: ''; position: absolute; inset: 12px; border: 1px solid rgba(184,151,90,0.3); border-radius: 50%; }
+    .hero-emblem-icon { font-size: 5rem; line-height: 1; }
+    .hero-emblem-text { font-family: 'Cormorant Garamond', serif; font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-top: 1.5rem; }
+    .hero-badge { position: absolute; bottom: 3rem; right: 3rem; z-index: 4; border: 1px solid var(--border); padding: 1rem 1.5rem; text-align: center; background: rgba(28,28,26,0.6); backdrop-filter: blur(8px); }
+    .hero-badge-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); display: block; line-height: 1; }
+    .hero-badge-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); margin-top: 0.25rem; }
+    .hero-line { position: absolute; bottom: 0; left: 4rem; width: 1px; height: 5rem; background: linear-gradient(to bottom, transparent, var(--gold)); opacity: 0.4; }
+
+    /* STRIP */
+    .intro-strip { background: var(--gold); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+    .intro-strip-item { display: flex; align-items: center; gap: 0.75rem; }
+    .intro-strip-icon { font-size: 1.25rem; }
+    .intro-strip-text { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--charcoal); }
+    .intro-strip-sep { width: 1px; height: 2rem; background: rgba(28,28,26,0.2); }
+
+    /* SERVICES */
+    #services { padding: 6rem 4rem; }
+    .section-header { margin-bottom: 4rem; }
+    .section-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 3.5vw, 3.5rem); font-weight: 300; line-height: 1.1; color: var(--ivory); }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); }
+    .service-card { background: var(--charcoal); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background 0.4s; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .service-card:hover { background: #222220; }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-number { font-family: 'Cormorant Garamond', serif; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold); opacity: 0.6; margin-bottom: 1.5rem; }
+    .service-icon { font-size: 2rem; margin-bottom: 1.25rem; }
+    .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--ivory); margin-bottom: 1rem; line-height: 1.2; }
+    .service-desc { font-size: 0.8rem; font-weight: 300; line-height: 1.85; color: var(--warm-grey); letter-spacing: 0.03em; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .service-tag { display: inline-block; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage-light); border: 1px solid rgba(163,180,159,0.3); padding: 0.3rem 0.75rem; }
+    .service-tag-gold { color: var(--gold); border-color: rgba(184,151,90,0.3); }
+
+    /* ECO */
+    #eco { background: #181A16; padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .eco-visual { position: relative; height: 420px; }
+    .eco-bg-block { position: absolute; top: 2rem; left: 2rem; right: 0; bottom: 0; background: linear-gradient(135deg, #1E2A1A, #141D12); border: 1px solid rgba(122,140,118,0.2); }
+    .eco-content-block { position: absolute; top: 0; left: 0; right: 2rem; bottom: 2rem; background: #1A2217; border: 1px solid rgba(122,140,118,0.35); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; text-align: center; }
+    .eco-leaf { font-size: 4rem; margin-bottom: 1.5rem; }
+    .eco-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--sage-light); line-height: 1.2; margin-bottom: 1rem; }
+    .eco-sub { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); }
+    .eco-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; justify-content: center; }
+    .eco-pill { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); border: 1px solid rgba(122,140,118,0.4); padding: 0.4rem 0.9rem; background: rgba(122,140,118,0.08); }
+    .eco-text-side p { font-size: 0.85rem; font-weight: 300; line-height: 1.9; color: var(--warm-grey); margin-top: 1.5rem; letter-spacing: 0.03em; }
+    .eco-options { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
+    .eco-option { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); background: rgba(255,255,255,0.02); }
+    .eco-option-icon { font-size: 1.25rem; flex-shrink: 0; }
+    .eco-option-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ivory); margin-bottom: 0.25rem; }
+    .eco-option-desc { font-size: 0.75rem; font-weight: 300; color: var(--warm-grey); line-height: 1.7; }
+
+    /* PROPERTY */
+    #property { padding: 6rem 4rem; background: var(--charcoal); }
+    .property-inner { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: center; }
+    .property-text p { font-size: 0.85rem; font-weight: 300; line-height: 1.9; color: var(--warm-grey); margin-top: 1.5rem; letter-spacing: 0.03em; }
+    .property-features { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .property-feature { display: flex; align-items: center; gap: 1rem; font-size: 0.8rem; font-weight: 300; color: var(--ivory); letter-spacing: 0.05em; }
+    .property-feature::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .property-visual { border: 1px solid var(--border); padding: 3rem; background: #202020; position: relative; }
+    .property-visual::before { content: 'FOR PROPERTY MANAGERS'; position: absolute; top: -0.6rem; left: 2rem; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--gold); background: #202020; padding: 0 0.75rem; }
+    .property-quote { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; font-style: italic; color: var(--ivory); line-height: 1.5; margin-bottom: 2rem; }
+    .property-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-top: 2rem; }
+    .property-stat { background: #202020; padding: 1.5rem; text-align: center; }
+    .property-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; color: var(--gold); display: block; line-height: 1; }
+    .property-stat-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); margin-top: 0.5rem; }
+
+    /* CONTACT */
+    #contact { background: #0F0F0E; padding: 7rem 4rem; text-align: center; border-top: 1px solid var(--border); }
+    .contact-eyebrow { font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .contact-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4.5rem); font-weight: 300; color: var(--ivory); line-height: 1.1; margin-bottom: 1.5rem; }
+    .contact-title em { font-style: italic; color: var(--gold-light); }
+    .contact-sub { font-size: 0.85rem; font-weight: 300; color: var(--warm-grey); margin-bottom: 2rem; letter-spacing: 0.05em; }
+    .contact-actions { display: flex; gap: 1.5rem; justify-content: center; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; }
+    .contact-phone { display: inline-block; font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; letter-spacing: 0.1em; transition: color 0.3s; }
+    .contact-phone:hover { color: var(--gold-light); }
+    .contact-details { font-size: 0.75rem; font-weight: 300; color: var(--warm-grey); letter-spacing: 0.15em; text-transform: uppercase; }
+    .contact-service-area { margin-top: 4rem; padding: 2rem; border: 1px solid var(--border); display: inline-block; }
+    .contact-service-area-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .contact-service-area-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ivory); letter-spacing: 0.05em; }
+
+    /* FOOTER */
+    footer { background: var(--deep); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.65rem; font-weight: 300; color: var(--warm-grey); letter-spacing: 0.1em; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.65rem; color: var(--warm-grey); text-decoration: none; letter-spacing: 0.1em; transition: color 0.3s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 8rem 1.5rem 4rem; }
+      .hero-right { height: 300px; }
+      .intro-strip { flex-wrap: wrap; gap: 1rem; padding: 1.5rem; }
+      .intro-strip-sep { display: none; }
+      #services { padding: 4rem 1.5rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      #eco { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .eco-visual { height: 280px; }
+      .property-inner { grid-template-columns: 1fr; gap: 3rem; }
+      #property { padding: 4rem 1.5rem; }
+      #contact { padding: 5rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Clean Sweeping Parrott</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#eco">Eco Options</a></li>
+      <li><a href="#property">Property Managers</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="join.html">Join Our Team</a></li>
+    </ul>
+    <a href="booking.html" class="nav-cta">Book Now</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Lower Mainland BC &nbsp;·&nbsp; Premium Cleaning</p>
+      <h1 class="hero-title">Immaculate<br>Spaces,<br><em>Effortlessly</em></h1>
+      <p class="hero-subtitle">White-glove cleaning services tailored to discerning homes and properties across the Lower Mainland. Eco-friendly and scent-free options available — because clean should never compromise your health or the environment.</p>
+      <div class="hero-actions">
+        <a href="booking.html" class="btn-primary">Book a Service</a>
+        <a href="#services" class="btn-secondary">View Services</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-pattern"></div>
+      <div class="hero-emblem">
+        <div class="hero-emblem-ring">
+          <div class="hero-emblem-icon">🦜</div>
+        </div>
+        <p class="hero-emblem-text">Est. Lower Mainland, BC</p>
+      </div>
+      <div class="hero-badge">
+        <span class="hero-badge-num">100%</span>
+        <span class="hero-badge-label">Satisfaction Guaranteed</span>
+      </div>
+    </div>
+    <div class="hero-line"></div>
+  </section>
+
+  <div class="intro-strip">
+    <div class="intro-strip-item"><span class="intro-strip-icon">🌿</span><span class="intro-strip-text">Eco-Friendly Options Available</span></div>
+    <div class="intro-strip-sep"></div>
+    <div class="intro-strip-item"><span class="intro-strip-icon">🚫</span><span class="intro-strip-text">Scent-Free Products Available</span></div>
+    <div class="intro-strip-sep"></div>
+    <div class="intro-strip-item"><span class="intro-strip-icon">🏢</span><span class="intro-strip-text">Property Management Specialists</span></div>
+    <div class="intro-strip-sep"></div>
+    <div class="intro-strip-item"><span class="intro-strip-icon">✨</span><span class="intro-strip-text">Premium Residential Cleaning</span></div>
+  </div>
+
+  <section id="services">
+    <div class="section-header reveal">
+      <p class="section-eyebrow">What We Offer</p>
+      <h2 class="section-title">Our <em>Services</em></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <p class="service-number">01</p>
+        <div class="service-icon">🏠</div>
+        <h3 class="service-name">Regular Residential Cleaning</h3>
+        <p class="service-desc">Consistent, thorough cleaning tailored to your home and schedule. Choose a one-time visit for whenever you need it, or subscribe for ongoing service so your home is always immaculate — without you lifting a finger. Weekly, bi-weekly, and monthly plans available.</p>
+        <div class="service-tags">
+          <span class="service-tag service-tag-gold">One-Time Available</span>
+          <span class="service-tag">Subscription Plans</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <p class="service-number">02</p>
+        <div class="service-icon">📦</div>
+        <h3 class="service-name">Move In / Move Out</h3>
+        <p class="service-desc">A fresh start — or a graceful farewell. Our move cleaning service covers every corner, baseboard, and cabinet so the space is spotless for new occupants or to reclaim your deposit in full.</p>
+        <div class="service-tags"><span class="service-tag">One-Time Service</span></div>
+      </div>
+      <div class="service-card reveal">
+        <p class="service-number">03</p>
+        <div class="service-icon">✨</div>
+        <h3 class="service-name">Deep Cleaning</h3>
+        <p class="service-desc">A comprehensive, top-to-bottom cleanse that goes well beyond the surface. Ideal for seasonal resets, post-renovation recovery, or simply reclaiming the immaculate standard your space deserves.</p>
+        <div class="service-tags"><span class="service-tag">Premium Service</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="eco">
+    <div class="eco-visual reveal">
+      <div class="eco-bg-block"></div>
+      <div class="eco-content-block">
+        <div class="eco-leaf">🌱</div>
+        <p class="eco-tagline">Clean Without Compromise</p>
+        <p class="eco-sub">Your choice. Your home. Your health.</p>
+        <div class="eco-pills">
+          <span class="eco-pill">Non-Toxic</span>
+          <span class="eco-pill">Biodegradable</span>
+          <span class="eco-pill">Scent-Free</span>
+          <span class="eco-pill">Hypoallergenic</span>
+          <span class="eco-pill">Eco-Certified</span>
+        </div>
+      </div>
+    </div>
+    <div class="eco-text-side reveal">
+      <p class="section-eyebrow">A Cleaner Clean</p>
+      <h2 class="section-title">Gentle on People,<br><em>Tough on Mess</em></h2>
+      <p>We believe your home should feel fresh — not chemical. That's why we offer full eco-friendly and scent-free cleaning options for clients with sensitivities, young children, pets, or simply a preference for products that are kinder to the planet.</p>
+      <div class="eco-options">
+        <div class="eco-option">
+          <span class="eco-option-icon">🌿</span>
+          <div>
+            <p class="eco-option-title">Eco-Friendly Products</p>
+            <p class="eco-option-desc">Plant-based, biodegradable cleaning solutions free from harsh chemicals — effective, responsible, and safe for your family and pets.</p>
+          </div>
+        </div>
+        <div class="eco-option">
+          <span class="eco-option-icon">🍃</span>
+          <div>
+            <p class="eco-option-title">Scent-Free Options</p>
+            <p class="eco-option-desc">Fragrance-free formulations for those with allergies, chemical sensitivities, asthma, or simply a preference for no added scents in their space.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="property">
+    <div class="property-inner">
+      <div class="property-text reveal">
+        <p class="section-eyebrow">Trusted Partners</p>
+        <h2 class="section-title">Property <em>Management</em><br>Services</h2>
+        <p>We work closely with property management companies throughout the Lower Mainland to deliver reliable, high-standard move-in and move-out cleaning between tenancies. Consistent results, professional communication, and flexible scheduling — because your timelines matter.</p>
+        <div class="property-features">
+          <div class="property-feature">Reliable scheduling around tenant transitions</div>
+          <div class="property-feature">Consistent, documented cleaning standards</div>
+          <div class="property-feature">Fast turnaround for vacant unit preparation</div>
+          <div class="property-feature">Eco-friendly options for health-conscious buildings</div>
+          <div class="property-feature">Direct communication and easy booking</div>
+          <div class="property-feature">Invoice-friendly for property accounting</div>
+        </div>
+      </div>
+      <div class="property-visual reveal">
+        <p class="property-quote">"The standard of a well-maintained property begins with the cleanliness of every transition."</p>
+        <p style="font-size:0.75rem; color: var(--warm-grey); letter-spacing:0.05em;">We understand the pressure of property turnovers. Our team is punctual, thorough, and professional — so you can present your units with confidence, every time.</p>
+        <div class="property-stat-row">
+          <div class="property-stat"><span class="property-stat-num">✓</span><p class="property-stat-label">Reliable Scheduling</p></div>
+          <div class="property-stat"><span class="property-stat-num">✓</span><p class="property-stat-label">Professional Standards</p></div>
+          <div class="property-stat"><span class="property-stat-num">✓</span><p class="property-stat-label">Eco Options</p></div>
+          <div class="property-stat"><span class="property-stat-num">✓</span><p class="property-stat-label">Fast Turnaround</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="contact-eyebrow reveal">Get in Touch</p>
+    <h2 class="contact-title reveal">Ready for an <em>Immaculate</em><br>Space?</h2>
+    <p class="contact-sub reveal">Book online or give us a call — we'd love to hear from you.</p>
+    <div class="contact-actions reveal">
+      <a href="booking.html" class="btn-primary">Book Online</a>
+      <a href="tel:7782395750" class="contact-phone">(778) 239-5750</a>
+    </div>
+    <p class="contact-details reveal">Monday – Saturday &nbsp;·&nbsp; Lower Mainland, BC</p>
+    <div class="contact-service-area reveal">
+      <p class="contact-service-area-label">Service Area</p>
+      <p class="contact-service-area-text">Vancouver · Burnaby · Richmond · Surrey · Coquitlam · North Shore & Beyond</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Clean Sweeping Parrott</div>
+    <div class="footer-links">
+      <a href="booking.html">Book a Service</a>
+      <a href="reviews.html">Reviews</a>
+    </div>
+    <p class="footer-copy">© 2025 Clean Sweeping Parrott · Lower Mainland, BC</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

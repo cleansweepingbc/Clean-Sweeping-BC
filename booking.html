@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book a Service | Clean Sweeping Parrott</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory: #F5F0E8; --cream: #EDE7D9; --charcoal: #1C1C1A; --deep: #111110;
+      --gold: #B8975A; --gold-light: #D4B07A; --sage: #7A8C76; --sage-light: #A3B49F;
+      --warm-grey: #8A8680; --border: rgba(184,151,90,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--charcoal); color: var(--ivory); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(28,28,26,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); text-decoration: none; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+    .nav-cta { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 0.65rem 1.5rem; text-decoration: none; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 10rem 4rem 4rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .page-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--ivory); margin-bottom: 1rem; }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+    .page-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--warm-grey); max-width: 500px; margin: 0 auto; line-height: 1.9; letter-spacing: 0.03em; }
+
+    /* BOOKING LAYOUT */
+    .booking-wrap { display: grid; grid-template-columns: 1fr 1.6fr; min-height: calc(100vh - 260px); }
+
+    /* LEFT PANEL */
+    .booking-info { padding: 4rem; background: #181816; border-right: 1px solid var(--border); }
+    .info-block { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .info-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .info-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .info-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--ivory); margin-bottom: 0.75rem; }
+    .info-text { font-size: 0.8rem; font-weight: 300; line-height: 1.85; color: var(--warm-grey); }
+    .info-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .info-list li { font-size: 0.78rem; font-weight: 300; color: var(--warm-grey); display: flex; align-items: center; gap: 0.75rem; }
+    .info-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; }
+    .contact-link { display: block; margin-top: 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+    .contact-link:hover { color: var(--gold-light); }
+
+    /* RIGHT PANEL — FORM */
+    .booking-form-wrap { padding: 4rem; }
+    .form-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ivory); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); }
+    input, select, textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(184,151,90,0.2);
+      color: var(--ivory); font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300;
+      padding: 0.85rem 1rem; outline: none; width: 100%;
+      transition: border-color 0.3s, background 0.3s; appearance: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); background: rgba(184,151,90,0.06); }
+    input::placeholder, textarea::placeholder { color: rgba(138,134,128,0.5); }
+    select option { background: #1C1C1A; color: var(--ivory); }
+    textarea { resize: vertical; min-height: 100px; }
+
+    /* SERVICE TYPE SELECTOR */
+    .service-selector { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .service-option { display: none; }
+    .service-label {
+      display: flex; flex-direction: column; gap: 0.25rem;
+      padding: 1rem 1.25rem; border: 1px solid rgba(184,151,90,0.2);
+      cursor: pointer; transition: all 0.3s; background: rgba(255,255,255,0.02);
+    }
+    .service-label:hover { border-color: var(--gold); background: rgba(184,151,90,0.06); }
+    .service-option:checked + .service-label { border-color: var(--gold); background: rgba(184,151,90,0.1); }
+    .service-label-icon { font-size: 1.25rem; }
+    .service-label-name { font-size: 0.75rem; font-weight: 400; color: var(--ivory); letter-spacing: 0.05em; }
+    .service-label-note { font-size: 0.65rem; color: var(--warm-grey); }
+
+    /* FREQUENCY */
+    .freq-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+    .freq-option { display: none; }
+    .freq-label { padding: 0.75rem 1rem; border: 1px solid rgba(184,151,90,0.2); cursor: pointer; text-align: center; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--warm-grey); transition: all 0.3s; }
+    .freq-label:hover { border-color: var(--gold); color: var(--ivory); }
+    .freq-option:checked + .freq-label { border-color: var(--gold); color: var(--gold); background: rgba(184,151,90,0.08); }
+
+    /* ECO ADD-ONS */
+    .addon-row { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .addon-check { display: none; }
+    .addon-label { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.25rem; border: 1px solid rgba(184,151,90,0.15); cursor: pointer; transition: all 0.3s; }
+    .addon-label:hover { border-color: rgba(184,151,90,0.4); }
+    .addon-check:checked + .addon-label { border-color: var(--sage); background: rgba(122,140,118,0.08); }
+    .addon-box { width: 16px; height: 16px; border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .addon-check:checked + .addon-label .addon-box { background: var(--sage); border-color: var(--sage); }
+    .addon-check:checked + .addon-label .addon-box::after { content: '✓'; font-size: 0.65rem; color: white; }
+    .addon-icon { font-size: 1rem; }
+    .addon-text-name { font-size: 0.78rem; color: var(--ivory); }
+    .addon-text-desc { font-size: 0.68rem; color: var(--warm-grey); }
+
+    /* CALENDAR */
+    .calendar-wrap { margin-bottom: 1.5rem; }
+    .cal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .cal-month { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ivory); }
+    .cal-nav { background: none; border: 1px solid var(--border); color: var(--gold); width: 32px; height: 32px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .cal-nav:hover { background: rgba(184,151,90,0.1); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-day-name { text-align: center; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--warm-grey); padding: 0.4rem 0; }
+    .cal-day { text-align: center; padding: 0.5rem; font-size: 0.8rem; cursor: pointer; border: 1px solid transparent; transition: all 0.25s; color: var(--ivory); }
+    .cal-day:hover:not(.empty):not(.past) { border-color: var(--gold); color: var(--gold); }
+    .cal-day.selected { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
+    .cal-day.empty, .cal-day.past { cursor: default; opacity: 0.2; }
+    .cal-day.today { border-color: rgba(184,151,90,0.4); }
+
+    /* TIME SLOTS */
+    .time-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+    .time-opt { display: none; }
+    .time-label { padding: 0.6rem 0.5rem; border: 1px solid rgba(184,151,90,0.2); cursor: pointer; text-align: center; font-size: 0.7rem; color: var(--warm-grey); transition: all 0.3s; }
+    .time-label:hover { border-color: var(--gold); color: var(--ivory); }
+    .time-opt:checked + .time-label { border-color: var(--gold); color: var(--gold); background: rgba(184,151,90,0.08); }
+
+    /* SUBMIT */
+    .form-divider { height: 1px; background: var(--border); margin: 2rem 0; }
+    .submit-btn { width: 100%; padding: 1.1rem; background: var(--gold); color: var(--charcoal); border: none; font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, transform 0.2s; }
+    .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-note { font-size: 0.68rem; font-weight: 300; color: var(--warm-grey); text-align: center; margin-top: 1rem; line-height: 1.7; }
+
+    /* SUCCESS */
+    .success-msg { display: none; text-align: center; padding: 3rem; border: 1px solid var(--border); background: rgba(184,151,90,0.05); }
+    .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 0.75rem; }
+    .success-text { font-size: 0.85rem; color: var(--warm-grey); line-height: 1.8; }
+
+    /* FOOTER */
+    footer { background: var(--deep); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.65rem; font-weight: 300; color: var(--warm-grey); letter-spacing: 0.1em; }
+
+    /* FREQUENCY SECTION visibility */
+    #freq-section { display: none; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .booking-wrap { grid-template-columns: 1fr; }
+      .booking-info { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+      .booking-form-wrap { padding: 2.5rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .service-selector { grid-template-columns: 1fr 1fr; }
+      .time-slots { grid-template-columns: repeat(3, 1fr); }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Clean Sweeping Parrott</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#eco">Eco Options</a></li>
+    <li><a href="index.html#property">Property Managers</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="join.html">Join Our Team</a></li>
+  </ul>
+  <a href="booking.html" class="nav-cta active">Book Now</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">Schedule Your Service</p>
+  <h1 class="page-title">Book a <em>Cleaning</em></h1>
+  <p class="page-subtitle">Choose your service, select a date and time, and we'll confirm within 24 hours. Eco-friendly and scent-free options available at no extra charge.</p>
+</div>
+
+<div class="booking-wrap">
+  <div class="booking-info">
+    <div class="info-block">
+      <p class="info-label">What to Expect</p>
+      <p class="info-title">Simple, Seamless Booking</p>
+      <p class="info-text">Fill out the form and we'll confirm your appointment within 24 hours. Have questions? Call us directly.</p>
+      <a href="tel:7782395750" class="contact-link">(778) 239-5750</a>
+    </div>
+    <div class="info-block">
+      <p class="info-label">Our Services</p>
+      <ul class="info-list">
+        <li>Regular Residential — One-Time or Subscription</li>
+        <li>Move In / Move Out Cleaning</li>
+        <li>Deep Cleaning</li>
+        <li>Property Management Turnovers</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <p class="info-label">Eco Options</p>
+      <p class="info-text">Eco-friendly and scent-free products available at no additional cost. Just select your preference in the booking form.</p>
+    </div>
+    <div class="info-block">
+      <p class="info-label">Service Area</p>
+      <p class="info-text">Vancouver · Burnaby · Richmond · Surrey · Coquitlam · North Shore & Beyond</p>
+    </div>
+  </div>
+
+  <div class="booking-form-wrap">
+    <div id="booking-form-container">
+      <p class="form-section-title">01 — Select a Service</p>
+      <div class="service-selector">
+        <input type="radio" name="service" id="svc-regular" class="service-option" value="Regular Residential Cleaning">
+        <label for="svc-regular" class="service-label">
+          <span class="service-label-icon">🏠</span>
+          <span class="service-label-name">Regular Residential</span>
+          <span class="service-label-note">One-time or subscription</span>
+        </label>
+
+        <input type="radio" name="service" id="svc-moveinout" class="service-option" value="Move In / Move Out">
+        <label for="svc-moveinout" class="service-label">
+          <span class="service-label-icon">📦</span>
+          <span class="service-label-name">Move In / Move Out</span>
+          <span class="service-label-note">One-time service</span>
+        </label>
+
+        <input type="radio" name="service" id="svc-deep" class="service-option" value="Deep Cleaning">
+        <label for="svc-deep" class="service-label">
+          <span class="service-label-icon">✨</span>
+          <span class="service-label-name">Deep Cleaning</span>
+          <span class="service-label-note">Premium top-to-bottom</span>
+        </label>
+
+        <input type="radio" name="service" id="svc-property" class="service-option" value="Property Management">
+        <label for="svc-property" class="service-label">
+          <span class="service-label-icon">🏢</span>
+          <span class="service-label-name">Property Management</span>
+          <span class="service-label-note">Move-in/out turnover</span>
+        </label>
+      </div>
+
+      <!-- Frequency (shown only for regular residential) -->
+      <div id="freq-section">
+        <p class="form-section-title">01b — Frequency</p>
+        <div class="freq-row">
+          <input type="radio" name="frequency" id="freq-once" class="freq-option" value="One-Time">
+          <label for="freq-once" class="freq-label">One-Time</label>
+
+          <input type="radio" name="frequency" id="freq-weekly" class="freq-option" value="Weekly">
+          <label for="freq-weekly" class="freq-label">Weekly</label>
+
+          <input type="radio" name="frequency" id="freq-biweekly" class="freq-option" value="Bi-Weekly">
+          <label for="freq-biweekly" class="freq-label">Bi-Weekly</label>
+
+          <input type="radio" name="frequency" id="freq-monthly" class="freq-option" value="Monthly">
+          <label for="freq-monthly" class="freq-label">Monthly</label>
+        </div>
+      </div>
+
+      <p class="form-section-title">02 — Eco Preferences</p>
+      <div class="addon-row">
+        <input type="checkbox" id="eco-friendly" class="addon-check" value="eco-friendly">
+        <label for="eco-friendly" class="addon-label">
+          <div class="addon-box"></div>
+          <span class="addon-icon">🌿</span>
+          <div><p class="addon-text-name">Eco-Friendly Products</p><p class="addon-text-desc">Plant-based, biodegradable, chemical-free formulas</p></div>
+        </label>
+
+        <input type="checkbox" id="scent-free" class="addon-check" value="scent-free">
+        <label for="scent-free" class="addon-label">
+          <div class="addon-box"></div>
+          <span class="addon-icon">🍃</span>
+          <div><p class="addon-text-name">Scent-Free Products</p><p class="addon-text-desc">Fragrance-free for sensitivities, allergies, or preference</p></div>
+        </label>
+      </div>
+
+      <p class="form-section-title">03 — Choose a Date</p>
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" id="cal-prev">&#8592;</button>
+          <span class="cal-month" id="cal-month-label"></span>
+          <button class="cal-nav" id="cal-next">&#8594;</button>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
+      <input type="hidden" id="selected-date" name="date">
+
+      <p class="form-section-title">04 — Preferred Time</p>
+      <div class="time-slots">
+        <input type="radio" name="time" id="t1" class="time-opt" value="8:00 AM"><label for="t1" class="time-label">8:00 AM</label>
+        <input type="radio" name="time" id="t2" class="time-opt" value="9:00 AM"><label for="t2" class="time-label">9:00 AM</label>
+        <input type="radio" name="time" id="t3" class="time-opt" value="10:00 AM"><label for="t3" class="time-label">10:00 AM</label>
+        <input type="radio" name="time" id="t4" class="time-opt" value="11:00 AM"><label for="t4" class="time-label">11:00 AM</label>
+        <input type="radio" name="time" id="t5" class="time-opt" value="12:00 PM"><label for="t5" class="time-label">12:00 PM</label>
+        <input type="radio" name="time" id="t6" class="time-opt" value="1:00 PM"><label for="t6" class="time-label">1:00 PM</label>
+        <input type="radio" name="time" id="t7" class="time-opt" value="2:00 PM"><label for="t7" class="time-label">2:00 PM</label>
+        <input type="radio" name="time" id="t8" class="time-opt" value="3:00 PM"><label for="t8" class="time-label">3:00 PM</label>
+      </div>
+
+      <p class="form-section-title">05 — Your Details</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Smith">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(604) 555-0100">
+        </div>
+        <div class="form-group full">
+          <label for="address">Service Address</label>
+          <input type="text" id="address" placeholder="123 Main St, Vancouver, BC">
+        </div>
+        <div class="form-group">
+          <label for="bedrooms">Bedrooms</label>
+          <select id="bedrooms">
+            <option value="">Select</option>
+            <option>Studio</option>
+            <option>1 Bedroom</option>
+            <option>2 Bedrooms</option>
+            <option>3 Bedrooms</option>
+            <option>4 Bedrooms</option>
+            <option>5+ Bedrooms</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bathrooms">Bathrooms</label>
+          <select id="bathrooms">
+            <option value="">Select</option>
+            <option>1 Bathroom</option>
+            <option>1.5 Bathrooms</option>
+            <option>2 Bathrooms</option>
+            <option>2.5 Bathrooms</option>
+            <option>3+ Bathrooms</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="notes">Special Instructions or Notes</label>
+          <textarea id="notes" placeholder="Pets, access instructions, areas of focus, allergies, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="form-divider"></div>
+      <button class="submit-btn" id="submit-btn">Confirm Booking Request</button>
+      <p class="form-note">We'll confirm your booking within 24 hours via email or phone. No payment required at this stage.</p>
+    </div>
+
+    <div class="success-msg" id="success-msg">
+      <div class="success-icon">✨</div>
+      <p class="success-title">Booking Request Sent</p>
+      <p class="success-text">Thank you! We've received your request and will be in touch within 24 hours to confirm your appointment.<br><br>Questions? Call us at <a href="tel:7782395750" style="color:var(--gold)">(778) 239-5750</a></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Clean Sweeping Parrott</div>
+  <p class="footer-copy">© 2025 Clean Sweeping Parrott · Lower Mainland, BC</p>
+</footer>
+
+<script>
+  // Show/hide frequency for regular residential
+  document.querySelectorAll('input[name="service"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('freq-section').style.display =
+        r.value === 'Regular Residential Cleaning' ? 'block' : 'none';
+    });
+  });
+
+  // Calendar
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let current = new Date();
+  current.setDate(1);
+  let selectedDate = null;
+
+  function renderCal() {
+    const label = document.getElementById('cal-month-label');
+    const grid = document.getElementById('cal-grid');
+    label.textContent = MONTHS[current.getMonth()] + ' ' + current.getFullYear();
+    grid.innerHTML = '';
+    DAYS.forEach(d => { const el = document.createElement('div'); el.className = 'cal-day-name'; el.textContent = d; grid.appendChild(el); });
+    const first = new Date(current.getFullYear(), current.getMonth(), 1).getDay();
+    const days = new Date(current.getFullYear(), current.getMonth() + 1, 0).getDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    for (let i = 0; i < first; i++) { const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el); }
+    for (let d = 1; d <= days; d++) {
+      const el = document.createElement('div');
+      const date = new Date(current.getFullYear(), current.getMonth(), d);
+      const isPast = date < today;
+      const isSun = date.getDay() === 0;
+      el.className = 'cal-day' + (isPast || isSun ? ' past' : '') + (date.toDateString() === today.toDateString() ? ' today' : '');
+      el.textContent = d;
+      if (!isPast && !isSun) {
+        el.addEventListener('click', () => {
+          document.querySelectorAll('.cal-day.selected').forEach(x => x.classList.remove('selected'));
+          el.classList.add('selected');
+          selectedDate = date;
+          const ds = date.toLocaleDateString('en-CA', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+          document.getElementById('selected-date').value = ds;
+        });
+      }
+      grid.appendChild(el);
+    }
+  }
+
+  document.getElementById('cal-prev').addEventListener('click', () => {
+    current.setMonth(current.getMonth() - 1);
+    const today = new Date(); today.setDate(1);
+    if (current < today) current = today;
+    renderCal();
+  });
+  document.getElementById('cal-next').addEventListener('click', () => { current.setMonth(current.getMonth() + 1); renderCal(); });
+  renderCal();
+
+  // Submit
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const service = document.querySelector('input[name="service"]:checked');
+    const time = document.querySelector('input[name="time"]:checked');
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const date = document.getElementById('selected-date').value;
+
+    if (!service || !fname || !lname || !email || !phone || !address || !date || !time) {
+      alert('Please complete all required fields, select a date, and choose a time.');
+      return;
+    }
+
+    const freq = document.querySelector('input[name="frequency"]:checked');
+    const eco = document.getElementById('eco-friendly').checked ? 'Eco-Friendly Products' : '';
+    const scent = document.getElementById('scent-free').checked ? 'Scent-Free Products' : '';
+    const prefs = [eco, scent].filter(Boolean).join(', ') || 'None';
+    const bedrooms = document.getElementById('bedrooms').value;
+    const bathrooms = document.getElementById('bathrooms').value;
+    const notes = document.getElementById('notes').value.trim();
+
+    const body = `New Booking Request — Clean Sweeping Parrott
+
+Service: ${service.value}${freq ? ' (' + freq.value + ')' : ''}
+Date: ${date}
+Time: ${time.value}
+Eco Preferences: ${prefs}
+
+Client: ${fname} ${lname}
+Email: ${email}
+Phone: ${phone}
+Address: ${address}
+Bedrooms: ${bedrooms || 'Not specified'}
+Bathrooms: ${bathrooms || 'Not specified'}
+
+Notes: ${notes || 'None'}`;
+
+    const subject = `Booking Request — ${service.value} — ${fname} ${lname}`;
+    window.location.href = `mailto:parrottdesigncompany@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    document.getElementById('booking-form-container').style.display = 'none';
+    document.getElementById('success-msg').style.display = 'block';
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Our Team | Clean Sweeping Parrott</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory: #F5F0E8; --charcoal: #1C1C1A; --deep: #111110;
+      --gold: #B8975A; --gold-light: #D4B07A; --sage: #7A8C76; --sage-light: #A3B49F;
+      --warm-grey: #8A8680; --border: rgba(184,151,90,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--charcoal); color: var(--ivory); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(28,28,26,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); text-decoration: none; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+    .nav-cta { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 0.65rem 1.5rem; text-decoration: none; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 10rem 4rem 5rem; text-align: center; border-bottom: 1px solid var(--border); background: linear-gradient(180deg, #161614 0%, var(--charcoal) 100%); }
+    .page-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--ivory); margin-bottom: 1rem; }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+    .page-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--warm-grey); max-width: 520px; margin: 0 auto; line-height: 1.9; letter-spacing: 0.03em; }
+
+    /* PERKS STRIP */
+    .perks-strip { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .perk { padding: 2.5rem 2rem; text-align: center; border-right: 1px solid var(--border); }
+    .perk:last-child { border-right: none; }
+    .perk-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .perk-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--ivory); margin-bottom: 0.35rem; }
+    .perk-desc { font-size: 0.72rem; font-weight: 300; color: var(--warm-grey); line-height: 1.7; }
+
+    /* MAIN LAYOUT */
+    .join-wrap { display: grid; grid-template-columns: 1fr 1.7fr; min-height: 80vh; }
+
+    /* LEFT PANEL */
+    .join-info { padding: 4rem; background: #181816; border-right: 1px solid var(--border); }
+    .info-block { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
+    .info-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .info-label { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem; }
+    .info-title { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 300; color: var(--ivory); margin-bottom: 0.75rem; }
+    .info-text { font-size: 0.8rem; font-weight: 300; line-height: 1.85; color: var(--warm-grey); }
+    .info-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .info-list li { font-size: 0.78rem; font-weight: 300; color: var(--warm-grey); display: flex; align-items: flex-start; gap: 0.75rem; }
+    .info-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; margin-top: 0.6rem; }
+    .contact-link { display: block; margin-top: 1.25rem; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+    .contact-link:hover { color: var(--gold-light); }
+
+    /* FORM PANEL */
+    .join-form-wrap { padding: 4rem; }
+    .form-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--ivory); margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); }
+    input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,151,90,0.2); color: var(--ivory); font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300; padding: 0.85rem 1rem; outline: none; width: 100%; transition: border-color 0.3s, background 0.3s; appearance: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); background: rgba(184,151,90,0.06); }
+    input::placeholder, textarea::placeholder { color: rgba(138,134,128,0.5); }
+    select option { background: #1C1C1A; color: var(--ivory); }
+    textarea { resize: vertical; min-height: 110px; }
+
+    /* SPECIALTIES CHECKBOXES */
+    .specialty-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+    .spec-check { display: none; }
+    .spec-label { display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.1rem; border: 1px solid rgba(184,151,90,0.15); cursor: pointer; transition: all 0.3s; }
+    .spec-label:hover { border-color: rgba(184,151,90,0.4); }
+    .spec-check:checked + .spec-label { border-color: var(--gold); background: rgba(184,151,90,0.08); }
+    .spec-box { width: 15px; height: 15px; border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .spec-check:checked + .spec-label .spec-box { background: var(--gold); border-color: var(--gold); }
+    .spec-check:checked + .spec-label .spec-box::after { content: '✓'; font-size: 0.6rem; color: var(--charcoal); font-weight: 600; }
+    .spec-icon { font-size: 1rem; }
+    .spec-name { font-size: 0.75rem; color: var(--ivory); }
+
+    /* AVAILABILITY */
+    .avail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 1.5rem; }
+    .avail-check { display: none; }
+    .avail-label { padding: 0.65rem 0.5rem; border: 1px solid rgba(184,151,90,0.15); cursor: pointer; text-align: center; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-grey); transition: all 0.3s; }
+    .avail-label:hover { border-color: var(--gold); color: var(--ivory); }
+    .avail-check:checked + .avail-label { border-color: var(--gold); color: var(--gold); background: rgba(184,151,90,0.08); }
+
+    /* ECO WILLINGNESS */
+    .eco-row { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+    .eco-check { display: none; }
+    .eco-label { display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.1rem; border: 1px solid rgba(122,140,118,0.2); cursor: pointer; transition: all 0.3s; }
+    .eco-label:hover { border-color: rgba(122,140,118,0.4); }
+    .eco-check:checked + .eco-label { border-color: var(--sage); background: rgba(122,140,118,0.08); }
+    .eco-box { width: 15px; height: 15px; border: 1px solid rgba(122,140,118,0.4); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    .eco-check:checked + .eco-label .eco-box { background: var(--sage); border-color: var(--sage); }
+    .eco-check:checked + .eco-label .eco-box::after { content: '✓'; font-size: 0.6rem; color: white; }
+    .eco-icon { font-size: 1rem; }
+    .eco-name { font-size: 0.75rem; color: var(--ivory); }
+    .eco-sub-text { font-size: 0.65rem; color: var(--warm-grey); }
+
+    /* RANGE INPUT */
+    input[type="range"] { -webkit-appearance: auto; appearance: auto; padding: 0; background: none; border: none; cursor: pointer; accent-color: var(--gold); }
+    input[type="range"]:focus { background: none; border: none; }
+    .rate-display { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); margin-top: 0.5rem; }
+
+    /* SUBMIT */
+    .form-divider { height: 1px; background: var(--border); margin: 2rem 0; }
+    .submit-btn { width: 100%; padding: 1.1rem; background: var(--gold); color: var(--charcoal); border: none; font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, transform 0.2s; }
+    .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-note { font-size: 0.68rem; font-weight: 300; color: var(--warm-grey); text-align: center; margin-top: 1rem; line-height: 1.7; }
+
+    /* SUCCESS */
+    .success-msg { display: none; text-align: center; padding: 4rem 2rem; border: 1px solid var(--border); background: rgba(184,151,90,0.04); }
+    .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--gold); margin-bottom: 1rem; }
+    .success-text { font-size: 0.85rem; color: var(--warm-grey); line-height: 1.9; max-width: 420px; margin: 0 auto; }
+
+    /* FOOTER */
+    footer { background: var(--deep); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.65rem; font-weight: 300; color: var(--warm-grey); letter-spacing: 0.1em; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .perks-strip { grid-template-columns: 1fr 1fr; }
+      .perk { border-bottom: 1px solid var(--border); }
+      .join-wrap { grid-template-columns: 1fr; }
+      .join-info { border-right: none; border-bottom: 1px solid var(--border); padding: 2.5rem 1.5rem; }
+      .join-form-wrap { padding: 2.5rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .specialty-grid { grid-template-columns: 1fr; }
+      .avail-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Clean Sweeping Parrott</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#eco">Eco Options</a></li>
+    <li><a href="index.html#property">Property Managers</a></li>
+    <li><a href="reviews.html">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="join.html" class="active">Join Our Team</a></li>
+  </ul>
+  <a href="booking.html" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <p class="page-eyebrow">Professional Cleaners</p>
+  <h1 class="page-title">Join the <em>Parrott</em> Network</h1>
+  <p class="page-subtitle">We partner with skilled, professional cleaners across the Lower Mainland to deliver exceptional service. Tell us about your experience and we'll be in touch about available opportunities.</p>
+</div>
+
+<!-- PERKS -->
+<div class="perks-strip">
+  <div class="perk reveal">
+    <div class="perk-icon">📅</div>
+    <p class="perk-title">Flexible Scheduling</p>
+    <p class="perk-desc">Choose jobs that fit your availability — no fixed shifts required</p>
+  </div>
+  <div class="perk reveal">
+    <div class="perk-icon">💰</div>
+    <p class="perk-title">Competitive Pay</p>
+    <p class="perk-desc">Set your own rate and get paid promptly for completed jobs</p>
+  </div>
+  <div class="perk reveal">
+    <div class="perk-icon">🌿</div>
+    <p class="perk-title">Eco-Forward</p>
+    <p class="perk-desc">Work with premium, health-conscious products and eco-friendly options</p>
+  </div>
+  <div class="perk reveal">
+    <div class="perk-icon">🤝</div>
+    <p class="perk-title">Trusted Partnership</p>
+    <p class="perk-desc">Join a growing professional network built on reliability and quality</p>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="join-wrap">
+
+  <!-- LEFT INFO PANEL -->
+  <div class="join-info">
+    <div class="info-block">
+      <p class="info-label">How It Works</p>
+      <p class="info-title">Simple & Straightforward</p>
+      <p class="info-text">Submit your application below. We review every submission personally and will reach out within 3–5 business days if there's a match for your skills and availability.</p>
+    </div>
+    <div class="info-block">
+      <p class="info-label">What We Look For</p>
+      <ul class="info-list">
+        <li>Proven professional cleaning experience</li>
+        <li>Reliability and attention to detail</li>
+        <li>Professionalism and strong communication</li>
+        <li>Willingness to use eco-friendly products</li>
+        <li>Valid driver's license or reliable transit access</li>
+        <li>Availability in the Lower Mainland BC area</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <p class="info-label">Types of Work</p>
+      <ul class="info-list">
+        <li>Regular residential cleaning (one-time & subscription)</li>
+        <li>Move in / move out cleaning</li>
+        <li>Deep cleaning services</li>
+        <li>Property management turnovers</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <p class="info-label">Questions?</p>
+      <p class="info-text">Reach out to us directly — we're happy to answer any questions about partnering with us.</p>
+      <a href="tel:7782395750" class="contact-link">(778) 239-5750</a>
+    </div>
+  </div>
+
+  <!-- FORM PANEL -->
+  <div class="join-form-wrap">
+    <div id="join-form-container">
+
+      <p class="form-section-title">01 — Personal Information</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="j-fname">First Name *</label>
+          <input type="text" id="j-fname" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label for="j-lname">Last Name *</label>
+          <input type="text" id="j-lname" placeholder="Smith">
+        </div>
+        <div class="form-group">
+          <label for="j-email">Email Address *</label>
+          <input type="email" id="j-email" placeholder="jane@email.com">
+        </div>
+        <div class="form-group">
+          <label for="j-phone">Phone Number *</label>
+          <input type="tel" id="j-phone" placeholder="(604) 555-0100">
+        </div>
+        <div class="form-group">
+          <label for="j-city">City / Area *</label>
+          <input type="text" id="j-city" placeholder="Vancouver, Burnaby, etc.">
+        </div>
+        <div class="form-group">
+          <label for="j-transport">Transportation</label>
+          <select id="j-transport">
+            <option value="">Select</option>
+            <option>Own vehicle</option>
+            <option>Public transit</option>
+            <option>Both</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="form-section-title">02 — Professional Experience</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="j-years">Years of Cleaning Experience *</label>
+          <select id="j-years">
+            <option value="">Select</option>
+            <option>Less than 1 year</option>
+            <option>1–2 years</option>
+            <option>3–5 years</option>
+            <option>5–10 years</option>
+            <option>10+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="j-context">Work Context</label>
+          <select id="j-context">
+            <option value="">Select</option>
+            <option>Independent / Self-employed</option>
+            <option>Worked for a cleaning company</option>
+            <option>Both</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label for="j-background">Professional Background *</label>
+          <textarea id="j-background" placeholder="Describe your cleaning experience — types of properties, clients, or companies you've worked with, any specializations, and what sets your work apart..."></textarea>
+        </div>
+        <div class="form-group full">
+          <label for="j-references">References</label>
+          <textarea id="j-references" style="min-height:80px;" placeholder="Please list 1–2 professional references (name, relationship, contact number or email)..."></textarea>
+        </div>
+      </div>
+
+      <p class="form-section-title">03 — Specialties</p>
+      <p style="font-size:0.75rem; color:var(--warm-grey); margin-bottom:1rem; font-weight:300;">Select all types of cleaning you are experienced and comfortable performing.</p>
+      <div class="specialty-grid">
+        <input type="checkbox" id="sp-regular" class="spec-check" value="Regular Residential">
+        <label for="sp-regular" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">🏠</span><span class="spec-name">Regular Residential</span>
+        </label>
+
+        <input type="checkbox" id="sp-moveinout" class="spec-check" value="Move In / Move Out">
+        <label for="sp-moveinout" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">📦</span><span class="spec-name">Move In / Move Out</span>
+        </label>
+
+        <input type="checkbox" id="sp-deep" class="spec-check" value="Deep Cleaning">
+        <label for="sp-deep" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">✨</span><span class="spec-name">Deep Cleaning</span>
+        </label>
+
+        <input type="checkbox" id="sp-property" class="spec-check" value="Property Management Turnovers">
+        <label for="sp-property" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">🏢</span><span class="spec-name">Property Management Turnovers</span>
+        </label>
+
+        <input type="checkbox" id="sp-post" class="spec-check" value="Post-Construction">
+        <label for="sp-post" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">🔨</span><span class="spec-name">Post-Construction</span>
+        </label>
+
+        <input type="checkbox" id="sp-commercial" class="spec-check" value="Commercial">
+        <label for="sp-commercial" class="spec-label">
+          <div class="spec-box"></div><span class="spec-icon">🏬</span><span class="spec-name">Commercial / Office</span>
+        </label>
+      </div>
+
+      <p class="form-section-title">04 — Availability</p>
+      <p style="font-size:0.75rem; color:var(--warm-grey); margin-bottom:1rem; font-weight:300;">Select all days you are generally available to take on jobs.</p>
+      <div class="avail-grid">
+        <input type="checkbox" id="av-mon" class="avail-check" value="Monday"><label for="av-mon" class="avail-label">Monday</label>
+        <input type="checkbox" id="av-tue" class="avail-check" value="Tuesday"><label for="av-tue" class="avail-label">Tuesday</label>
+        <input type="checkbox" id="av-wed" class="avail-check" value="Wednesday"><label for="av-wed" class="avail-label">Wednesday</label>
+        <input type="checkbox" id="av-thu" class="avail-check" value="Thursday"><label for="av-thu" class="avail-label">Thursday</label>
+        <input type="checkbox" id="av-fri" class="avail-check" value="Friday"><label for="av-fri" class="avail-label">Friday</label>
+        <input type="checkbox" id="av-sat" class="avail-check" value="Saturday"><label for="av-sat" class="avail-label">Saturday</label>
+        <input type="checkbox" id="av-flex" class="avail-check" value="Flexible"><label for="av-flex" class="avail-label">Flexible</label>
+        <input type="checkbox" id="av-urgent" class="avail-check" value="Short Notice"><label for="av-urgent" class="avail-label">Short Notice</label>
+      </div>
+
+      <p class="form-section-title">05 — Eco & Product Preferences</p>
+      <div class="eco-row">
+        <input type="checkbox" id="eco-willing" class="eco-check" value="eco-friendly">
+        <label for="eco-willing" class="eco-label">
+          <div class="eco-box"></div>
+          <span class="eco-icon">🌿</span>
+          <div><p class="eco-name">Comfortable using eco-friendly, chemical-free products</p><p class="eco-sub-text">Plant-based, biodegradable formulas</p></div>
+        </label>
+
+        <input type="checkbox" id="scent-willing" class="eco-check" value="scent-free">
+        <label for="scent-willing" class="eco-label">
+          <div class="eco-box"></div>
+          <span class="eco-icon">🍃</span>
+          <div><p class="eco-name">Comfortable using scent-free products</p><p class="eco-sub-text">For clients with sensitivities or allergies</p></div>
+        </label>
+      </div>
+
+      <p class="form-section-title">06 — Rate Expectation</p>
+      <div class="form-group">
+        <label for="j-rate">Hourly Rate Expectation (CAD)</label>
+        <input type="range" id="j-rate" min="20" max="60" value="30" step="1" oninput="document.getElementById('rate-val').textContent = '$' + this.value + '/hr'">
+        <p class="rate-display" id="rate-val">$30/hr</p>
+      </div>
+      <div class="form-group">
+        <label for="j-notes">Anything Else You'd Like Us to Know</label>
+        <textarea id="j-notes" style="min-height:80px;" placeholder="Certifications, languages spoken, special skills, equipment you own, etc."></textarea>
+      </div>
+
+      <div class="form-divider"></div>
+      <button class="submit-btn" id="join-submit-btn">Submit Application</button>
+      <p class="form-note">We review all applications personally and will be in touch within 3–5 business days.<br>Your information is kept strictly confidential.</p>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-msg" id="join-success">
+      <div class="success-icon">🦜</div>
+      <p class="success-title">Application Received</p>
+      <p class="success-text">Thank you for your interest in joining the Clean Sweeping Parrott network. We've received your application and will review it carefully. If there's a good fit, we'll be in touch within 3–5 business days.<br><br>Questions in the meantime? Call us at <a href="tel:7782395750" style="color:var(--gold)">(778) 239-5750</a></p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Clean Sweeping Parrott</div>
+  <p class="footer-copy">© 2025 Clean Sweeping Parrott · Lower Mainland, BC</p>
+</footer>
+
+<script>
+  // Reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Submit handler
+  document.getElementById('join-submit-btn').addEventListener('click', () => {
+    const fname = document.getElementById('j-fname').value.trim();
+    const lname = document.getElementById('j-lname').value.trim();
+    const email = document.getElementById('j-email').value.trim();
+    const phone = document.getElementById('j-phone').value.trim();
+    const city = document.getElementById('j-city').value.trim();
+    const years = document.getElementById('j-years').value;
+    const background = document.getElementById('j-background').value.trim();
+
+    if (!fname || !lname || !email || !phone || !city || !years || !background) {
+      alert('Please fill in all required fields marked with *.');
+      return;
+    }
+
+    const context = document.getElementById('j-context').value;
+    const transport = document.getElementById('j-transport').value;
+    const references = document.getElementById('j-references').value.trim();
+    const rate = document.getElementById('j-rate').value;
+    const notes = document.getElementById('j-notes').value.trim();
+
+    const specialties = [...document.querySelectorAll('.spec-check:checked')].map(c => c.value).join(', ') || 'None specified';
+    const availability = [...document.querySelectorAll('.avail-check:checked')].map(c => c.value).join(', ') || 'Not specified';
+    const ecoWilling = document.getElementById('eco-willing').checked ? 'Yes' : 'No';
+    const scentWilling = document.getElementById('scent-willing').checked ? 'Yes' : 'No';
+
+    const body = `New Cleaner Application — Clean Sweeping Parrott
+
+Name: ${fname} ${lname}
+Email: ${email}
+Phone: ${phone}
+City / Area: ${city}
+Transportation: ${transport || 'Not specified'}
+
+--- EXPERIENCE ---
+Years of Experience: ${years}
+Work Context: ${context || 'Not specified'}
+Background:
+${background}
+
+References:
+${references || 'None provided'}
+
+--- SPECIALTIES ---
+${specialties}
+
+--- AVAILABILITY ---
+${availability}
+
+--- ECO PREFERENCES ---
+Eco-Friendly Products: ${ecoWilling}
+Scent-Free Products: ${scentWilling}
+
+--- RATE ---
+Hourly Rate Expectation: $${rate}/hr
+
+--- ADDITIONAL NOTES ---
+${notes || 'None'}`;
+
+    const subject = `Cleaner Application — ${fname} ${lname}`;
+    window.location.href = `mailto:parrottdesigncompany@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    document.getElementById('join-form-container').style.display = 'none';
+    document.getElementById('join-success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

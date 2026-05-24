@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reviews | Clean Sweeping Parrott</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ivory: #F5F0E8; --charcoal: #1C1C1A; --deep: #111110;
+      --gold: #B8975A; --gold-light: #D4B07A; --sage: #7A8C76; --sage-light: #A3B49F;
+      --warm-grey: #8A8680; --border: rgba(184,151,90,0.25);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; background: var(--charcoal); color: var(--ivory); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 1000; opacity: 0.4; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; background: rgba(28,28,26,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; letter-spacing: 0.15em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.7rem; font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); text-decoration: none; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold-light); }
+    .nav-cta { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--charcoal); background: var(--gold); padding: 0.65rem 1.5rem; text-decoration: none; transition: background 0.3s; }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    .page-header { padding: 10rem 4rem 5rem; text-align: center; border-bottom: 1px solid var(--border); }
+    .page-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
+    .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.1; color: var(--ivory); margin-bottom: 1rem; }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+    .page-subtitle { font-size: 0.85rem; font-weight: 300; color: var(--warm-grey); max-width: 480px; margin: 0 auto; line-height: 1.9; }
+
+    /* STATS BAR */
+    .stats-bar { display: flex; justify-content: center; gap: 0; border-bottom: 1px solid var(--border); }
+    .stat-item { padding: 2.5rem 4rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; color: var(--gold); display: block; line-height: 1; }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); margin-top: 0.4rem; }
+
+    /* REVIEWS GRID */
+    .reviews-section { padding: 5rem 4rem; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); margin-bottom: 5rem; }
+    .review-card { background: var(--charcoal); padding: 2.5rem; position: relative; transition: background 0.3s; }
+    .review-card:hover { background: #202020; }
+    .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 1.25rem; }
+    .review-text { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; font-style: italic; line-height: 1.65; color: var(--ivory); margin-bottom: 1.5rem; }
+    .review-author { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .review-service { font-size: 0.65rem; color: var(--warm-grey); margin-top: 0.25rem; letter-spacing: 0.05em; }
+    .review-quote-mark { position: absolute; top: 1.5rem; right: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 5rem; color: var(--gold); opacity: 0.08; line-height: 1; }
+
+    /* LEAVE A REVIEW */
+    .leave-review { background: #181816; border-top: 1px solid var(--border); padding: 5rem 4rem; }
+    .leave-header { text-align: center; margin-bottom: 3rem; }
+    .section-eyebrow { font-size: 0.65rem; font-weight: 300; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; color: var(--ivory); }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    .review-form-wrap { max-width: 760px; margin: 0 auto; }
+
+    /* STAR RATING INPUT */
+    .star-rating { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-direction: row-reverse; }
+    .star-input { display: none; }
+    .star-btn { font-size: 2rem; cursor: pointer; color: rgba(184,151,90,0.2); transition: color 0.2s; }
+    .star-rating .star-btn:hover,
+    .star-rating .star-btn:hover ~ .star-btn,
+    .star-input:checked ~ .star-btn { color: var(--gold); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-grey); }
+    input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid rgba(184,151,90,0.2); color: var(--ivory); font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300; padding: 0.85rem 1rem; outline: none; width: 100%; transition: border-color 0.3s, background 0.3s; appearance: none; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); background: rgba(184,151,90,0.06); }
+    input::placeholder, textarea::placeholder { color: rgba(138,134,128,0.5); }
+    select option { background: #1C1C1A; }
+    textarea { resize: vertical; min-height: 130px; }
+
+    .submit-btn { width: 100%; padding: 1.1rem; background: var(--gold); color: var(--charcoal); border: none; font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: background 0.3s, transform 0.2s; }
+    .submit-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .form-note { font-size: 0.68rem; color: var(--warm-grey); text-align: center; margin-top: 1rem; line-height: 1.7; }
+
+    .success-msg { display: none; text-align: center; padding: 3rem; border: 1px solid var(--border); background: rgba(184,151,90,0.05); }
+    .success-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .success-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--gold); margin-bottom: 0.75rem; }
+    .success-text { font-size: 0.85rem; color: var(--warm-grey); line-height: 1.8; }
+
+    /* PENDING REVIEW DISPLAY */
+    .pending-reviews { margin-top: 3rem; }
+    .pending-title { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--warm-grey); margin-bottom: 1.5rem; text-align: center; }
+    .pending-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5px; background: var(--border); }
+    .pending-card { background: #181816; padding: 2rem; }
+    .pending-stars { color: var(--gold); font-size: 0.8rem; margin-bottom: 0.75rem; }
+    .pending-text { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--ivory); line-height: 1.6; margin-bottom: 1rem; }
+    .pending-author { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+    .pending-service { font-size: 0.62rem; color: var(--warm-grey); margin-top: 0.2rem; }
+    .no-reviews { text-align: center; padding: 3rem; color: var(--warm-grey); font-size: 0.85rem; }
+
+    footer { background: var(--deep); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); letter-spacing: 0.15em; }
+    .footer-copy { font-size: 0.65rem; font-weight: 300; color: var(--warm-grey); letter-spacing: 0.1em; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { padding: 1.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border); width: 50%; }
+      .reviews-section { padding: 3rem 1.5rem; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .leave-review { padding: 3rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Clean Sweeping Parrott</a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#eco">Eco Options</a></li>
+    <li><a href="index.html#property">Property Managers</a></li>
+    <li><a href="reviews.html" class="active">Reviews</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+    <li><a href="join.html">Join Our Team</a></li>
+  </ul>
+  <a href="booking.html" class="nav-cta">Book Now</a>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">Client Testimonials</p>
+  <h1 class="page-title">What Our Clients <em>Say</em></h1>
+  <p class="page-subtitle">We take pride in every space we clean. Here's what our clients across the Lower Mainland have to say about their experience.</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num">5.0</span><p class="stat-label">Average Rating</p></div>
+  <div class="stat-item"><span class="stat-num" id="review-count">3</span><p class="stat-label">Reviews</p></div>
+  <div class="stat-item"><span class="stat-num">100%</span><p class="stat-label">Satisfaction</p></div>
+</div>
+
+<!-- FEATURED REVIEWS -->
+<section class="reviews-section">
+  <div class="reviews-grid" id="featured-reviews">
+    <div class="review-card reveal">
+      <div class="review-quote-mark">"</div>
+      <p class="review-stars">★★★★★</p>
+      <p class="review-text">Absolutely impeccable service. Our home has never felt this clean — and the fact that they used eco-friendly products made the whole experience even better. We've signed up for bi-weekly service.</p>
+      <p class="review-author">Sarah M.</p>
+      <p class="review-service">Regular Residential · Vancouver</p>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote-mark">"</div>
+      <p class="review-stars">★★★★★</p>
+      <p class="review-text">We manage several rental properties and Clean Sweeping Parrott has been a game-changer for our turnovers. Reliable, thorough, and always on time. Highly recommend for any property manager.</p>
+      <p class="review-author">David K.</p>
+      <p class="review-service">Property Management · Burnaby</p>
+    </div>
+    <div class="review-card reveal">
+      <div class="review-quote-mark">"</div>
+      <p class="review-stars">★★★★★</p>
+      <p class="review-text">Requested the scent-free option due to my daughter's allergies and they were incredibly professional and thorough. The move-out clean got us our full deposit back. Couldn't be happier.</p>
+      <p class="review-author">Priya T.</p>
+      <p class="review-service">Move Out · Richmond</p>
+    </div>
+  </div>
+
+  <!-- SUBMITTED REVIEWS (shown dynamically) -->
+  <div id="submitted-reviews-section" style="display:none;">
+    <p class="pending-title">Recent Client Reviews</p>
+    <div class="pending-grid" id="submitted-reviews-grid"></div>
+  </div>
+</section>
+
+<!-- LEAVE A REVIEW -->
+<section class="leave-review">
+  <div class="leave-header">
+    <p class="section-eyebrow">Share Your Experience</p>
+    <h2 class="section-title">Leave a <em>Review</em></h2>
+  </div>
+
+  <div class="review-form-wrap">
+    <div id="review-form-container">
+      <div class="star-rating" id="star-rating">
+        <input type="radio" name="rating" id="s5" class="star-input" value="5">
+        <label for="s5" class="star-btn">★</label>
+        <input type="radio" name="rating" id="s4" class="star-input" value="4">
+        <label for="s4" class="star-btn">★</label>
+        <input type="radio" name="rating" id="s3" class="star-input" value="3">
+        <label for="s3" class="star-btn">★</label>
+        <input type="radio" name="rating" id="s2" class="star-input" value="2">
+        <label for="s2" class="star-btn">★</label>
+        <input type="radio" name="rating" id="s1" class="star-input" value="1">
+        <label for="s1" class="star-btn">★</label>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="r-fname">First Name</label>
+          <input type="text" id="r-fname" placeholder="Jane">
+        </div>
+        <div class="form-group">
+          <label for="r-lname">Last Name Initial</label>
+          <input type="text" id="r-lname" placeholder="S." maxlength="3">
+        </div>
+        <div class="form-group">
+          <label for="r-service">Service Received</label>
+          <select id="r-service">
+            <option value="">Select a service</option>
+            <option>Regular Residential Cleaning</option>
+            <option>Move In / Move Out</option>
+            <option>Deep Cleaning</option>
+            <option>Property Management</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="r-city">City</label>
+          <input type="text" id="r-city" placeholder="Vancouver">
+        </div>
+        <div class="form-group full">
+          <label for="r-review">Your Review</label>
+          <textarea id="r-review" placeholder="Tell us about your experience with Clean Sweeping Parrott..."></textarea>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="review-submit-btn">Submit Review</button>
+      <p class="form-note">Your review will be displayed on this page. Thank you for taking the time to share your experience.</p>
+    </div>
+
+    <div class="success-msg" id="review-success">
+      <div class="success-icon">⭐</div>
+      <p class="success-title">Thank You!</p>
+      <p class="success-text">Your review has been submitted and is now displayed below.<br>We truly appreciate your feedback.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Clean Sweeping Parrott</div>
+  <p class="footer-copy">© 2025 Clean Sweeping Parrott · Lower Mainland, BC</p>
+</footer>
+
+<script>
+  // Reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Load existing reviews from localStorage
+  const STORAGE_KEY = 'csp_reviews';
+  function getReviews() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch { return []; }
+  }
+  function saveReview(r) {
+    const reviews = getReviews();
+    reviews.unshift(r);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(reviews));
+  }
+  function starsHtml(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+
+  function renderSubmitted() {
+    const reviews = getReviews();
+    const section = document.getElementById('submitted-reviews-section');
+    const grid = document.getElementById('submitted-reviews-grid');
+    const countEl = document.getElementById('review-count');
+    countEl.textContent = 3 + reviews.length;
+    if (reviews.length === 0) { section.style.display = 'none'; return; }
+    section.style.display = 'block';
+    grid.innerHTML = '';
+    reviews.forEach(r => {
+      const card = document.createElement('div');
+      card.className = 'pending-card';
+      card.innerHTML = `
+        <p class="pending-stars">${starsHtml(r.rating)}</p>
+        <p class="pending-text">${r.text}</p>
+        <p class="pending-author">${r.name}</p>
+        <p class="pending-service">${r.service}${r.city ? ' · ' + r.city : ''}</p>`;
+      grid.appendChild(card);
+    });
+  }
+
+  renderSubmitted();
+
+  document.getElementById('review-submit-btn').addEventListener('click', () => {
+    const rating = document.querySelector('input[name="rating"]:checked');
+    const fname = document.getElementById('r-fname').value.trim();
+    const lname = document.getElementById('r-lname').value.trim();
+    const service = document.getElementById('r-service').value;
+    const city = document.getElementById('r-city').value.trim();
+    const text = document.getElementById('r-review').value.trim();
+
+    if (!rating || !fname || !service || !text) {
+      alert('Please fill in all required fields and select a star rating.');
+      return;
+    }
+
+    const review = {
+      rating: parseInt(rating.value),
+      name: fname + (lname ? ' ' + lname : ''),
+      service, city, text,
+      date: new Date().toLocaleDateString('en-CA')
+    };
+
+    saveReview(review);
+    renderSubmitted();
+
+    document.getElementById('review-form-container').style.display = 'none';
+    document.getElementById('review-success').style.display = 'block';
+
+    // Scroll to submitted reviews
+    setTimeout(() => {
+      document.getElementById('submitted-reviews-section').scrollIntoView({ behavior: 'smooth' });
+    }, 800);
+  });
+</script>
+</body>
+</html>
